@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yjxxt.mapper.TeacherMapper">
+  <resultMap id="BaseResultMap" type="com.yjxxt.bean.Teacher">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="teacher_name" jdbcType="VARCHAR" property="teacherName" />
+    <result column="teacher_pwd" jdbcType="VARCHAR" property="teacherPwd" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="update_date" jdbcType="DATE" property="updateDate" />
+    <result column="is_valid" jdbcType="INTEGER" property="isValid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, teacher_name, teacher_pwd, sex, create_date, update_date, is_valid
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_teacher
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_teacher
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yjxxt.bean.Teacher">
+    insert into t_teacher (id, teacher_name, teacher_pwd, 
+      sex, create_date, update_date, 
+      is_valid)
+    values (#{id,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, #{teacherPwd,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{createDate,jdbcType=DATE}, #{updateDate,jdbcType=DATE}, 
+      #{isValid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yjxxt.bean.Teacher">
+    insert into t_teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="teacherName != null">
+        teacher_name,
+      </if>
+      <if test="teacherPwd != null">
+        teacher_pwd,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
+      <if test="isValid != null">
+        is_valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teacherName != null">
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPwd != null">
+        #{teacherPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yjxxt.bean.Teacher">
+    update t_teacher
+    <set>
+      <if test="teacherName != null">
+        teacher_name = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPwd != null">
+        teacher_pwd = #{teacherPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=DATE},
+      </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=DATE},
+      </if>
+      <if test="isValid != null">
+        is_valid = #{isValid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yjxxt.bean.Teacher">
+    update t_teacher
+    set teacher_name = #{teacherName,jdbcType=VARCHAR},
+      teacher_pwd = #{teacherPwd,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=DATE},
+      update_date = #{updateDate,jdbcType=DATE},
+      is_valid = #{isValid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>
